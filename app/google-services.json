@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "839421538636",
+    "project_id": "buksu-eeu",
+    "storage_bucket": "buksu-eeu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839421538636:android:84e30786302ac4f7851fe9",
+        "android_client_info": {
+          "package_name": "com.example.buksu_eeu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839421538636-2d7ea4jt3t35t7k9mfq6kt34s1fqttep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.buksu_eeu",
+            "certificate_hash": "754d4649935c93010293018326038a3769255444"
+          }
+        },
+        {
+          "client_id": "839421538636-eptk8rp12krkfqntrp0kla3a0b436gs3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.buksu_eeu",
+            "certificate_hash": "a63ad6aa265b826ce53308309f9265d8b0bdbee6"
+          }
+        },
+        {
+          "client_id": "839421538636-2h9h11gboo5082sq36pkcvt75mip69qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvWGBUZLOKSA8v_S10_9_gQaMNeqZKTIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839421538636-2h9h11gboo5082sq36pkcvt75mip69qt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

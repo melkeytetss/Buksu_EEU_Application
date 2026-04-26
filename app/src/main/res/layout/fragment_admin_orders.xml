@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/abyss"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingTop="60dp">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage"
+                android:textColor="@color/text_grey"
+                android:textSize="13sp"
+                android:letterSpacing="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+            <!-- Order Filters -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none"
+                android:clipToPadding="false"
+                android:paddingEnd="20dp">
+
+                <LinearLayout
+                    android:id="@+id/admin_order_filters_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="All"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/btn_blue"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_pending"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Pending"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_confirmed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Confirmed"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_ready"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Ready for Pickup"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_completed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="Completed"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_orders_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false" />
+
+            <!-- Pagination Controls -->
+            <LinearLayout
+                android:id="@+id/pagination_layout_admin_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_prev_page_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/midnight"
+                    android:text="← Prev"
+                    android:textAllCaps="false"
+                    android:textColor="@color/soft_white"
+                    android:textSize="13sp"
+                    app:cornerRadius="999dp"
+                    app:elevation="0dp"
+                    app:strokeColor="@color/electric_blue"
+                    app:strokeWidth="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_page_number_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="Page 1 of 1"
+                    android:textColor="@color/pale_mist"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_next_page_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/midnight"
+                    android:text="Next →"
+                    android:textAllCaps="false"
+                    android:textColor="@color/soft_white"
+                    android:textSize="13sp"
+                    app:cornerRadius="999dp"
+                    app:elevation="0dp"
+                    app:strokeColor="@color/electric_blue"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/no_orders_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:gravity="center"
+                android:text="No orders to show."
+                android:textColor="@color/text_grey"
+                android:visibility="gone"
+                android:padding="32dp" />
+
+            <!-- Bottom padding for nav bar -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

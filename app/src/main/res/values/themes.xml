@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base app theme -->
+    <style name="Base.Theme.BuksuEEU" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/electric_blue</item>
+        <item name="colorPrimaryVariant">@color/neon_purple</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/gold_accent</item>
+        <item name="colorSecondaryVariant">@color/gold_accent</item>
+        <item name="colorOnSecondary">@color/abyss</item>
+
+        <!-- Background and surface -->
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:colorBackground">@color/abyss</item>
+        <item name="colorOnBackground">@color/white</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/abyss</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/abyss</item>
+
+        <!-- Text -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_grey</item>
+        <item name="android:textColorHint">@color/text_grey</item>
+
+        <!-- EditText cursor and highlight -->
+        <item name="colorControlActivated">@color/gold_accent</item>
+        <item name="colorControlNormal">@color/text_grey</item>
+        <item name="colorControlHighlight">@color/white_10</item>
+    </style>
+
+    <style name="Theme.BuksuEEU" parent="Base.Theme.BuksuEEU" />
+
+    <!-- Custom Dialog style (Dark) -->
+    <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.Dialog.Alert">
+        <item name="shapeAppearanceCornerMedium">@style/DialogShapeAppearance</item>
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/text_grey</item>
+        <item name="colorPrimary">@color/gold_accent</item>
+    </style>
+
+    <!-- Global dark dialog override -->
+    <style name="DarkAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="android:background">@color/card_surface</item>
+        <item name="backgroundTint">@color/card_surface</item>
+        <item name="colorBackgroundFloating">@color/card_surface</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/text_grey</item>
+        <item name="colorPrimary">@color/gold_accent</item>
+        <item name="shapeAppearanceCornerMedium">@style/DialogShapeAppearance</item>
+    </style>
+
+    <style name="DialogShapeAppearance" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Bottom Sheet dark theme -->
+    <style name="BottomSheetDialogTheme" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/deep_navy</item>
+        <item name="shapeAppearance">@style/BottomSheetShapeAppearance</item>
+    </style>
+
+    <style name="BottomSheetShapeAppearance" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- Custom Navigation Indicator -->
+    <style name="CustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/white_10</item>
+        <item name="android:width">48dp</item>
+        <item name="android:height">36dp</item>
+        <item name="marginHorizontal">12dp</item>
+    </style>
+
+</resources>

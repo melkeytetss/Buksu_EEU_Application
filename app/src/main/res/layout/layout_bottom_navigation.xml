@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@color/card_navy"
+    android:elevation="16dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/nav_home_bottom"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_home"
+        app:tint="@color/text_grey" />
+
+    <ImageView
+        android:id="@+id/nav_notifications_bottom"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_notification_bell"
+        app:tint="@color/text_grey" />
+
+    <ImageView
+        android:id="@+id/nav_cart_bottom"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_shopping_cart"
+        app:tint="@color/text_grey" />
+
+    <ImageView
+        android:id="@+id/nav_orders_bottom"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_orders"
+        app:tint="@color/text_grey" />
+
+    <ImageView
+        android:id="@+id/nav_profile_bottom"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_user_profile"
+        app:tint="@color/text_grey" />
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- BUKSU EEU Premium Design System -->
+    <color name="abyss">#0F0C29</color>
+    <color name="deep_navy">#100E3F</color>
+    <color name="midnight">#302B63</color>
+    <color name="card_surface">#24243E</color>
+    
+    <!-- Accents -->
+    <color name="gold_accent">#FFD700</color>
+    <color name="electric_blue">#4776E6</color>
+    <color name="electric_cyan">#00E5FF</color>
+    <color name="neon_purple">#8E54E9</color>
+    <color name="soft_white">#F8F9FA</color>
+    <color name="text_grey">#A0A0C0</color>
+    
+    <!-- Status -->
+    <color name="success_glow">#00E676</color>
+    <color name="error_glow">#FF5252</color>
+    <color name="warning_glow">#FFAB40</color>
+
+    <!-- Transparencies for Glassmorphism -->
+    <color name="glass_white">#1AFFFFFF</color>
+    <color name="glass_dark">#4D000000</color>
+    <color name="white_10">#1AFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+
+    <!-- Legacy aliases -->
+    <color name="bg_navy">#0F0C29</color>
+    <color name="btn_blue">#4776E6</color>
+    <color name="header_yellow">#FFD700</color>
+    <color name="tag_red">#FF5252</color>
+    <color name="stock_green">#00E676</color>
+    <color name="royal_blue">#4776E6</color>
+    <color name="ice_white">#F8F9FA</color>
+    <color name="lavender">#A0A0C0</color>
+    <color name="pale_mist">#A0A0C0</color>
+    <color name="gold">#FFD700</color>
+    <color name="input_bg">#302B63</color>
+    <color name="google_btn_bg">#302B63</color>
+    <color name="card_navy">#24243E</color>
+    <color name="light_bg">#0F0C29</color>
+    <color name="link_blue">#4776E6</color>
+    <color name="archive_red">#FF5252</color>
+</resources>

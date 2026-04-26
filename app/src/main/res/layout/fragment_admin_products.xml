@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/abyss">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingTop="60dp">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage"
+                android:textColor="@color/text_grey"
+                android:textSize="13sp"
+                android:letterSpacing="0.1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+            <!-- Search Bar -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:startIconDrawable="@android:drawable/ic_menu_search"
+                app:startIconTint="@color/text_grey"
+                app:hintTextColor="@color/gold_accent"
+                android:textColorHint="@color/text_grey"
+                app:boxStrokeColor="@color/gold_accent"
+                android:hint="Search products...">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_product_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Category Filter Chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/category_chip_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_all"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="All"
+                        android:checked="true"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface"
+                        app:checkedIconVisible="true" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_pe_upper_male"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PE Upper (Male)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_pe_upper_female"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PE Upper (Female)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_pe_lower_male"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PE Lower (Male)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_pe_lower_female"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PE Lower (Female)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_school_upper_male"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="School Uniform Upper (Male)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_school_upper_female"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="School Uniform Upper (Female)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_school_lower_male"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="School Uniform Lower (Male)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_school_lower_female"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="School Uniform Lower (Female)"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_accessories"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accessories"
+                        android:textColor="@color/white"
+                        app:chipBackgroundColor="@color/card_surface" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_products_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false" />
+
+            <!-- Bottom padding for FAB + nav -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="120dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- FAB for Add Product -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:layout_marginBottom="96dp"
+        android:backgroundTint="@color/gold_accent"
+        android:text="Add Product"
+        android:textColor="@color/abyss"
+        android:textStyle="bold"
+        app:iconTint="@color/abyss"
+        app:icon="@android:drawable/ic_input_add"
+        app:cornerRadius="16dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

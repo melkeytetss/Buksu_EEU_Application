@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <ImageView
+        android:id="@+id/notification_bell"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_popup_reminder"
+        app:tint="@color/bg_navy" />
+
+    <View
+        android:id="@+id/notification_indicator"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="-2dp"
+        android:background="@drawable/badge_bg"
+        android:visibility="gone" />
+
+</FrameLayout>

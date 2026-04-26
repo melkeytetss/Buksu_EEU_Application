@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:paddingBottom="32dp"
+    android:background="@color/deep_navy">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="#44FFFFFF"
+        android:backgroundTint="@color/text_grey" />
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Size"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Product Name -->
+    <TextView
+        android:id="@+id/size_sheet_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Product Name"
+        android:textColor="@color/text_grey"
+        android:textSize="13sp" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="16dp"
+        android:background="@color/white_10" />
+
+    <!-- Size Chips -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/size_chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:selectionRequired="false">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_size_s"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/card_surface"
+            app:chipStrokeColor="@color/gold_accent"
+            app:chipStrokeWidth="1dp"
+            app:checkedIconTint="@color/abyss"
+            app:chipMinHeight="48dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_size_m"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/card_surface"
+            app:chipStrokeColor="@color/gold_accent"
+            app:chipStrokeWidth="1dp"
+            app:checkedIconTint="@color/abyss"
+            app:chipMinHeight="48dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_size_l"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/card_surface"
+            app:chipStrokeColor="@color/gold_accent"
+            app:chipStrokeWidth="1dp"
+            app:checkedIconTint="@color/abyss"
+            app:chipMinHeight="48dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_size_xl"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XL"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:chipBackgroundColor="@color/card_surface"
+            app:chipStrokeColor="@color/gold_accent"
+            app:chipStrokeWidth="1dp"
+            app:checkedIconTint="@color/abyss"
+            app:chipMinHeight="48dp" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- Confirm Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm_size"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/gold_accent"
+        android:text="Add to Cart"
+        android:textColor="@color/abyss"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:cornerRadius="16dp" />
+
+</LinearLayout>
