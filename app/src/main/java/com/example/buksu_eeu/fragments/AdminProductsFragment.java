@@ -32,10 +32,21 @@ public class AdminProductsFragment extends Fragment {
     private AdminProductAdapter adapter;
     private List<Product> originalProductList = new ArrayList<>();
     private List<Product> displayedProductList = new ArrayList<>();
+    private List<Product> paginatedProductList = new ArrayList<>();
 
     private TextInputEditText searchInput;
     private String currentSearchQuery = "";
     private String currentCategoryFilter = "All";
+
+    // Pagination variables
+    private int currentPage = 1;
+    private static final int ITEMS_PER_PAGE = 10;
+    
+    private View paginationLayout;
+    private android.widget.TextView tvPageNumber;
+    private View btnPrevPage;
+    private View btnNextPage;
+    private android.widget.TextView noProductsText;
 
     @Nullable
     @Override
@@ -50,19 +61,41 @@ public class AdminProductsFragment extends Fragment {
 
         searchInput = view.findViewById(R.id.search_product_input);
         recyclerView = view.findViewById(R.id.recycler_products_admin);
+        
+        paginationLayout = view.findViewById(R.id.pagination_layout_admin_products);
+        tvPageNumber = view.findViewById(R.id.tv_page_number_admin_prod);
+        btnPrevPage = view.findViewById(R.id.btn_prev_page_admin_prod);
+        btnNextPage = view.findViewById(R.id.btn_next_page_admin_prod);
+        noProductsText = view.findViewById(R.id.no_products_text_admin);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter = new AdminProductAdapter(requireContext(), displayedProductList);
+        adapter = new AdminProductAdapter(requireContext(), paginatedProductList);
         recyclerView.setAdapter(adapter);
 
         ExtendedFloatingActionButton fab = view.findViewById(R.id.fab_add_product);
         fab.setOnClickListener(v -> startActivity(new Intent(requireContext(), AddProductActivity.class)));
 
-        setupFilters();
+        setupCategoryButtons(view);
+        setupPaginationListeners();
         loadProducts();
     }
 
-    private void setupFilters() {
+    private void setupPaginationListeners() {
+        btnPrevPage.setOnClickListener(v -> {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+            }
+        });
+
+        btnNextPage.setOnClickListener(v -> {
+            int maxPage = (int) Math.ceil((double) displayedProductList.size() / ITEMS_PER_PAGE);
+            if (currentPage < maxPage) {
+                currentPage++;
+                updatePagination();
+            }
+        });
+        
         searchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -76,8 +109,6 @@ public class AdminProductsFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-
-        setupCategoryButtons(getView());
     }
 
     private void setupCategoryButtons(View view) {
@@ -170,6 +201,46 @@ public class AdminProductsFragment extends Fragment {
             if (matchesSearch && matchesCategory) {
                 displayedProductList.add(product);
             }
+        }
+        
+        if (displayedProductList.isEmpty()) {
+            noProductsText.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            paginationLayout.setVisibility(View.GONE);
+        } else {
+            noProductsText.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+        
+        // Reset to first page when filtering
+        currentPage = 1;
+        updatePagination();
+    }
+
+    private void updatePagination() {
+        int totalItems = displayedProductList.size();
+        int totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
+        
+        if (totalItems <= ITEMS_PER_PAGE) {
+            paginationLayout.setVisibility(View.GONE);
+        } else {
+            paginationLayout.setVisibility(View.VISIBLE);
+            tvPageNumber.setText("Page " + currentPage + " of " + (totalPages == 0 ? 1 : totalPages));
+            
+            // Disable/Enable buttons based on current page
+            btnPrevPage.setEnabled(currentPage > 1);
+            btnPrevPage.setAlpha(currentPage > 1 ? 1.0f : 0.5f);
+            
+            btnNextPage.setEnabled(currentPage < totalPages);
+            btnNextPage.setAlpha(currentPage < totalPages ? 1.0f : 0.5f);
+        }
+
+        int start = (currentPage - 1) * ITEMS_PER_PAGE;
+        int end = Math.min(start + ITEMS_PER_PAGE, totalItems);
+
+        paginatedProductList.clear();
+        if (start < totalItems) {
+            paginatedProductList.addAll(displayedProductList.subList(start, end));
         }
         
         adapter.notifyDataSetChanged();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BukSu_EEU</string>
+    <string name="app_name">BUKSU EEU</string>
     <string name="login_prompt">Don\'t have an account? &lt;font color="#FFD700"&gt;&lt;b&gt;Sign Up&lt;/b&gt;&lt;/font&gt;</string>
     <string name="register_prompt">Already have an account? &lt;font color="#FFD700"&gt;&lt;b&gt;Sign In&lt;/b&gt;&lt;/font&gt;</string>
     <string name="default_web_client_id">839421538636-2h9h11gboo5082sq36pkcvt75mip69qt.apps.googleusercontent.com</string>

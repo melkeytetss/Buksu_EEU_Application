@@ -151,19 +151,29 @@ public class CartManager {
                             for (Map<String, Object> itemMap : items) {
                                 try {
                                     Map<String, Object> productMap = (Map<String, Object>) itemMap.get("product");
-                                    long quantity = (long) itemMap.get("quantity");
+                                    Object qtyObj = itemMap.get("quantity");
+                                    long quantity = (qtyObj instanceof Number) ? ((Number) qtyObj).longValue() : 0;
                                     
-                                    Product product = new Product();
-                                    product.setId((String) productMap.get("id"));
-                                    product.setName((String) productMap.get("name"));
-                                    product.setCategory((String) productMap.get("category"));
-                                    product.setPrice(((Number) productMap.get("price")).doubleValue());
-                                    product.setStock(((Number) productMap.get("stock")).intValue());
-                                    product.setImageUrl((String) productMap.get("imageUrl"));
-                                    product.setDescription((String) productMap.get("description"));
-                                    product.setArchived((boolean) productMap.get("archived"));
-
-                                    cartItems.add(new CartItem(product, (int) quantity, (String) itemMap.get("size")));
+                                    if (productMap != null) {
+                                        Product product = new Product();
+                                        product.setId((String) productMap.get("id"));
+                                        product.setName((String) productMap.get("name"));
+                                        product.setCategory((String) productMap.get("category"));
+                                        
+                                        Object priceObj = productMap.get("price");
+                                        product.setPrice((priceObj instanceof Number) ? ((Number) priceObj).doubleValue() : 0.0);
+                                        
+                                        Object stockObj = productMap.get("stock");
+                                        product.setStock((stockObj instanceof Number) ? ((Number) stockObj).intValue() : 0);
+                                        
+                                        product.setImageUrl((String) productMap.get("imageUrl"));
+                                        product.setDescription((String) productMap.get("description"));
+                                        
+                                        Object archivedObj = productMap.get("archived");
+                                        product.setArchived(archivedObj != null && (boolean) archivedObj);
+                                        
+                                        cartItems.add(new CartItem(product, (int) quantity, (String) itemMap.get("size")));
+                                    }
                                 } catch (Exception e) {
                                     Log.e(TAG, "Error parsing cart item", e);
                                 }

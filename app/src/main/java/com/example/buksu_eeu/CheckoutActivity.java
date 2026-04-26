@@ -37,6 +37,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     
     private FirebaseFirestore db;
+    private EmailService emailService;
     private String savedName, savedEmail, savedPhone;
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "PickupPrefs";
@@ -48,6 +49,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        emailService = new EmailService();
         
         initViews();
         setupOrderSummary();
@@ -202,14 +204,49 @@ public class CheckoutActivity extends AppCompatActivity {
 
             com.google.firebase.firestore.DocumentReference orderRef = db.collection("orders").document();
             transaction.set(orderRef, order);
-
-            return null;
-        }).addOnSuccessListener(result -> {
-            sendNotification("admin", "New Order Received", "A new order has been placed by " + savedName);
-            CartManager.getInstance().clearCart();
-            showCustomToast("Order placed successfully!", false);
             
-            Intent intent = new Intent(this, NavContainerActivity.class);
+            // Return order ID to the listener
+            return orderRef.getId();
+        }).addOnSuccessListener(orderId -> {
+            sendNotification("admin", "New Order Received", "A new order has been placed by " + savedName);
+            
+            // Capture data BEFORE clearing cart
+            double finalTotal = CartManager.getInstance().getTotalPrice();
+            StringBuilder sb = new StringBuilder();
+            org.json.JSONArray itemsArray = new org.json.JSONArray();
+            
+            try {
+                for (CartItem item : CartManager.getInstance().getCartItems()) {
+                    // For Email
+                    sb.append(item.getProduct().getName()).append(" (x").append(item.getQuantity()).append("), ");
+                    
+                    // For Order Confirmation UI
+                    org.json.JSONObject itemObj = new org.json.JSONObject();
+                    itemObj.put("name", item.getProduct().getName());
+                    itemObj.put("imageUrl", item.getProduct().getImageUrl());
+                    itemObj.put("quantity", item.getQuantity());
+                    itemObj.put("price", item.getProduct().getPrice());
+                    itemsArray.put(itemObj);
+                }
+            } catch (org.json.JSONException e) {
+                e.printStackTrace();
+            }
+
+            String itemsSummary = sb.toString();
+            if (itemsSummary.endsWith(", ")) {
+                itemsSummary = itemsSummary.substring(0, itemsSummary.length() - 2);
+            }
+
+            // NOW we can clear the cart
+            CartManager.getInstance().clearCart();
+            
+            // Send Email Alert to Admin with captured data
+            emailService.sendNewOrderAlertToAdmin((String) orderId, savedName, finalTotal, itemsSummary);
+            
+            Intent intent = new Intent(CheckoutActivity.this, OrderConfirmationActivity.class);
+            intent.putExtra("total_price", finalTotal);
+            intent.putExtra("items_json", itemsArray.toString());
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

@@ -147,20 +147,31 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.User
         com.google.firebase.firestore.FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
         
         db.runTransaction(transaction -> {
-            // 1. Return stock
+            // 1. Read all required data first
+            java.util.Map<com.google.firebase.firestore.DocumentReference, Long> updates = new java.util.HashMap<>();
+            
             if (order.getItems() != null) {
                 for (Map<String, Object> item : order.getItems()) {
                     String productId = (String) item.get("productId");
                     long quantity = ((Number) item.get("quantity")).longValue();
                     
-                    com.google.firebase.firestore.DocumentReference productRef = db.collection("products").document(productId);
-                    com.google.firebase.firestore.DocumentSnapshot productDoc = transaction.get(productRef);
-                    
-                    if (productDoc.exists()) {
-                        long currentStock = productDoc.getLong("stock");
-                        transaction.update(productRef, "stock", currentStock + quantity);
+                    if (productId != null) {
+                        com.google.firebase.firestore.DocumentReference productRef = db.collection("products").document(productId);
+                        com.google.firebase.firestore.DocumentSnapshot productDoc = transaction.get(productRef);
+                        
+                        if (productDoc.exists()) {
+                            Long currentStock = productDoc.getLong("stock");
+                            if (currentStock != null) {
+                                updates.put(productRef, currentStock + quantity);
+                            }
+                        }
                     }
                 }
+            }
+
+            // 2. Perform all writes after reads
+            for (java.util.Map.Entry<com.google.firebase.firestore.DocumentReference, Long> entry : updates.entrySet()) {
+                transaction.update(entry.getKey(), "stock", entry.getValue());
             }
 
             // 2. Update order status

@@ -206,6 +206,66 @@
                 android:layout_marginTop="16dp"
                 android:nestedScrollingEnabled="false" />
 
+            <!-- Pagination Controls -->
+            <LinearLayout
+                android:id="@+id/pagination_layout_admin_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_prev_page_admin_prod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/midnight"
+                    android:text="← Prev"
+                    android:textAllCaps="false"
+                    android:textColor="@color/soft_white"
+                    android:textSize="13sp"
+                    app:cornerRadius="999dp"
+                    app:elevation="0dp"
+                    app:strokeColor="@color/electric_blue"
+                    app:strokeWidth="1dp" />
+
+                <TextView
+                    android:id="@+id/tv_page_number_admin_prod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="Page 1 of 1"
+                    android:textColor="@color/pale_mist"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_next_page_admin_prod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/midnight"
+                    android:text="Next →"
+                    android:textAllCaps="false"
+                    android:textColor="@color/soft_white"
+                    android:textSize="13sp"
+                    app:cornerRadius="999dp"
+                    app:elevation="0dp"
+                    app:strokeColor="@color/electric_blue"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/no_products_text_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:gravity="center"
+                android:text="No products to show."
+                android:textColor="@color/text_grey"
+                android:visibility="gone"
+                android:padding="32dp" />
+
             <!-- Bottom padding for FAB + nav -->
             <Space
                 android:layout_width="match_parent"

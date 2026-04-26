@@ -22,11 +22,13 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
     private Context context;
     private List<Order> orderList;
     private FirebaseFirestore db;
+    private EmailService emailService;
 
     public AdminOrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
         this.db = FirebaseFirestore.getInstance();
+        this.emailService = new EmailService();
     }
 
     @NonNull
@@ -44,18 +46,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
         holder.totalPrice.setText(String.format("₱%.0f", order.getTotalPrice()));
 
         updateStatusBadge(holder.status, order.getStatus());
-
-        StringBuilder itemsSummary = new StringBuilder("Items: ");
-        if (order.getItems() != null) {
-            for (Map<String, Object> item : order.getItems()) {
-                itemsSummary.append(item.get("name")).append(" (x").append(item.get("quantity")).append("), ");
-            }
-        }
-        String summary = itemsSummary.toString();
-        if (summary.endsWith(", ")) {
-            summary = summary.substring(0, summary.length() - 2);
-        }
-        holder.itemsSummary.setText(summary);
+        holder.itemsSummary.setText(getOrderItemsSummary(order));
 
         holder.updateStatusBtn.setOnClickListener(v -> showStatusDialog(order));
         
@@ -124,10 +115,34 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
                     String userId = order.getUserId();
                     if (userId != null) {
                         sendNotification(userId, "Order Status Updated", "Your order is now: " + newStatus);
+                        
+                        // Send Email if ready for pickup
+                        if (newStatus.equals("Ready to pickup") && order.getCustomerEmail() != null) {
+                            emailService.sendReadyToPickupEmail(
+                                order.getCustomerEmail(),
+                                order.getCustomerName(),
+                                order.getOrderId(),
+                                getOrderItemsSummary(order)
+                            );
+                        }
                     }
                     Toast.makeText(context, "Status updated to: " + newStatus, Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> Toast.makeText(context, "Error updating status", Toast.LENGTH_SHORT).show());
+    }
+
+    private String getOrderItemsSummary(Order order) {
+        StringBuilder itemsSummary = new StringBuilder();
+        if (order.getItems() != null) {
+            for (Map<String, Object> item : order.getItems()) {
+                itemsSummary.append(item.get("name")).append(" (x").append(item.get("quantity")).append("), ");
+            }
+        }
+        String summary = itemsSummary.toString();
+        if (summary.endsWith(", ")) {
+            summary = summary.substring(0, summary.length() - 2);
+        }
+        return summary;
     }
 
     private void sendNotification(String recipientId, String title, String message) {
