@@ -62,105 +62,141 @@
                 android:scrollbars="none"
                 android:layout_marginTop="12dp">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/category_chip_group"
+                <LinearLayout
+                    android:id="@+id/admin_product_filters_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_all"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_prod_all"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="All"
-                        android:checked="true"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface"
-                        app:checkedIconVisible="true" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/btn_blue"
+                        android:textColor="@color/white" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_pe_upper_male"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_pe_upper_male"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="PE Upper (Male)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_pe_upper_female"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_pe_upper_female"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="PE Upper (Female)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_pe_lower_male"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_pe_lower_male"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="PE Lower (Male)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_pe_lower_female"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_pe_lower_female"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="PE Lower (Female)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_school_upper_male"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_school_upper_male"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="School Uniform Upper (Male)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_school_upper_female"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_school_upper_female"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="School Uniform Upper (Female)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_school_lower_male"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_school_lower_male"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="School Uniform Lower (Male)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_school_lower_female"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_school_lower_female"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
                         android:text="School Uniform Lower (Female)"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_accessories"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_accessories"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:text="Accessories"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="@color/card_surface" />
-                </com.google.android.material.chip.ChipGroup>
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+                </LinearLayout>
             </HorizontalScrollView>
 
             <androidx.recyclerview.widget.RecyclerView

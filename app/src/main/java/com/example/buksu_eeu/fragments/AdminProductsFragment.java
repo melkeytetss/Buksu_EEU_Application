@@ -34,8 +34,6 @@ public class AdminProductsFragment extends Fragment {
     private List<Product> displayedProductList = new ArrayList<>();
 
     private TextInputEditText searchInput;
-    private ChipGroup categoryChipGroup;
-
     private String currentSearchQuery = "";
     private String currentCategoryFilter = "All";
 
@@ -51,7 +49,6 @@ public class AdminProductsFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         searchInput = view.findViewById(R.id.search_product_input);
-        categoryChipGroup = view.findViewById(R.id.category_chip_group);
         recyclerView = view.findViewById(R.id.recycler_products_admin);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -80,24 +77,56 @@ public class AdminProductsFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
         });
 
-        categoryChipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (checkedIds.isEmpty()) {
-                currentCategoryFilter = "All";
-            } else {
-                int checkedId = checkedIds.get(0);
-                if (checkedId == R.id.chip_pe_upper_male) currentCategoryFilter = "PE Upper (Male)";
-                else if (checkedId == R.id.chip_pe_upper_female) currentCategoryFilter = "PE Upper (Female)";
-                else if (checkedId == R.id.chip_pe_lower_male) currentCategoryFilter = "PE Lower (Male)";
-                else if (checkedId == R.id.chip_pe_lower_female) currentCategoryFilter = "PE Lower (Female)";
-                else if (checkedId == R.id.chip_school_upper_male) currentCategoryFilter = "School Uniform Upper (Male)";
-                else if (checkedId == R.id.chip_school_upper_female) currentCategoryFilter = "School Uniform Upper (Female)";
-                else if (checkedId == R.id.chip_school_lower_male) currentCategoryFilter = "School Uniform Lower (Male)";
-                else if (checkedId == R.id.chip_school_lower_female) currentCategoryFilter = "School Uniform Lower (Female)";
-                else if (checkedId == R.id.chip_accessories) currentCategoryFilter = "Accessories";
-                else currentCategoryFilter = "All";
-            }
-            filterProducts();
-        });
+        setupCategoryButtons(getView());
+    }
+
+    private void setupCategoryButtons(View view) {
+        if (view == null) return;
+        
+        com.google.android.material.button.MaterialButton btnAll = view.findViewById(R.id.btn_filter_prod_all);
+        com.google.android.material.button.MaterialButton btnPeUpperMale = view.findViewById(R.id.btn_filter_pe_upper_male);
+        com.google.android.material.button.MaterialButton btnPeUpperFemale = view.findViewById(R.id.btn_filter_pe_upper_female);
+        com.google.android.material.button.MaterialButton btnPeLowerMale = view.findViewById(R.id.btn_filter_pe_lower_male);
+        com.google.android.material.button.MaterialButton btnPeLowerFemale = view.findViewById(R.id.btn_filter_pe_lower_female);
+        com.google.android.material.button.MaterialButton btnSchoolUpperMale = view.findViewById(R.id.btn_filter_school_upper_male);
+        com.google.android.material.button.MaterialButton btnSchoolUpperFemale = view.findViewById(R.id.btn_filter_school_upper_female);
+        com.google.android.material.button.MaterialButton btnSchoolLowerMale = view.findViewById(R.id.btn_filter_school_lower_male);
+        com.google.android.material.button.MaterialButton btnSchoolLowerFemale = view.findViewById(R.id.btn_filter_school_lower_female);
+        com.google.android.material.button.MaterialButton btnAccessories = view.findViewById(R.id.btn_filter_accessories);
+
+        com.google.android.material.button.MaterialButton[] allButtons = {
+            btnAll, btnPeUpperMale, btnPeUpperFemale, btnPeLowerMale, btnPeLowerFemale,
+            btnSchoolUpperMale, btnSchoolUpperFemale, btnSchoolLowerMale, btnSchoolLowerFemale, btnAccessories
+        };
+
+        String[] categoryNames = {
+            "All", "PE Upper (Male)", "PE Upper (Female)", "PE Lower (Male)", "PE Lower (Female)",
+            "School Uniform Upper (Male)", "School Uniform Upper (Female)", "School Uniform Lower (Male)", "School Uniform Lower (Female)", "Accessories"
+        };
+
+        for (int i = 0; i < allButtons.length; i++) {
+            com.google.android.material.button.MaterialButton btn = allButtons[i];
+            String categoryName = categoryNames[i];
+
+            btn.setOnClickListener(v -> {
+                if (!currentCategoryFilter.equals(categoryName)) {
+                    currentCategoryFilter = categoryName;
+
+                    int activeColor = requireContext().getColor(R.color.btn_blue);
+                    int activeTextColor = requireContext().getColor(R.color.white);
+                    int inactiveColor = requireContext().getColor(R.color.soft_white);
+                    int inactiveTextColor = requireContext().getColor(R.color.black);
+
+                    for (int j = 0; j < allButtons.length; j++) {
+                        boolean isActive = currentCategoryFilter.equals(categoryNames[j]);
+                        allButtons[j].setBackgroundTintList(android.content.res.ColorStateList.valueOf(isActive ? activeColor : inactiveColor));
+                        allButtons[j].setTextColor(isActive ? activeTextColor : inactiveTextColor);
+                    }
+
+                    filterProducts();
+                }
+            });
+        }
     }
 
     private void loadProducts() {
