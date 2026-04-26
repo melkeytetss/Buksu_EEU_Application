@@ -13,3 +13,20 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Security and Keys
+# Google Services config
+google-services.json
+
+# Keystore files
+*.jks
+*.keystore
+
+# Properties containing API keys or passwords
+key.properties
+secrets.properties
+*.env
+
+# Firebase Admin service account keys (if any)
+serviceAccountKey.json
+*-firebase-adminsdk-*.json
