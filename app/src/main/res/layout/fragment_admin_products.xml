@@ -82,102 +82,11 @@
                         android:textColor="@color/white" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_pe_upper_male"
+                        android:id="@+id/btn_filter_apparel"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
-                        android:text="PE Upper (Male)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_pe_upper_female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="PE Upper (Female)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_pe_lower_male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="PE Lower (Male)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_pe_lower_female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="PE Lower (Female)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_school_upper_male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="School Uniform Upper (Male)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_school_upper_female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="School Uniform Upper (Female)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_school_lower_male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="School Uniform Lower (Male)"
-                        android:textAllCaps="false"
-                        android:textSize="13sp"
-                        app:cornerRadius="999dp"
-                        app:elevation="0dp"
-                        android:backgroundTint="@color/soft_white"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_filter_school_lower_female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="School Uniform Lower (Female)"
+                        android:text="Apparel"
                         android:textAllCaps="false"
                         android:textSize="13sp"
                         app:cornerRadius="999dp"
@@ -191,6 +100,84 @@
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
                         android:text="Accessories"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_bags"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Bags"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_headwear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Headwear"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_drinkware"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Drinkware"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_home_decor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Home Decor"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_gift_sets"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Gift Sets &amp; Boxes"
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:cornerRadius="999dp"
+                        app:elevation="0dp"
+                        android:backgroundTint="@color/soft_white"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_filter_crafts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Crafts &amp; Collectibles"
                         android:textAllCaps="false"
                         android:textSize="13sp"
                         app:cornerRadius="999dp"

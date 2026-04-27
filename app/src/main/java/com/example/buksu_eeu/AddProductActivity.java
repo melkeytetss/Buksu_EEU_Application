@@ -103,11 +103,9 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void setupCategoryDropdown() {
         String[] categories = {
-            "PE Upper (Male)", "PE Upper (Female)",
-            "PE Lower (Male)", "PE Lower (Female)",
-            "School Uniform Upper (Male)", "School Uniform Upper (Female)",
-            "School Uniform Lower (Male)", "School Uniform Lower (Female)",
-            "Accessories"
+            "Apparel", "Accessories", "Bags", "Headwear",
+            "Drinkware", "Home Decor", "Gift Sets & Boxes",
+            "Crafts & Collectibles"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
         categoryDropdown.setAdapter(adapter);

@@ -118,7 +118,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private boolean requiresSize(String category) {
         if (category == null) return false;
-        return category.contains("PE") || category.contains("School Uniform");
+        return category.equalsIgnoreCase("Apparel");
     }
 
     private void showSizeDialog() {

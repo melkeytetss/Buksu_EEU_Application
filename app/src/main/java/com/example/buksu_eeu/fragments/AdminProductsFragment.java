@@ -115,25 +115,24 @@ public class AdminProductsFragment extends Fragment {
         if (view == null) return;
         
         com.google.android.material.button.MaterialButton btnAll = view.findViewById(R.id.btn_filter_prod_all);
-        com.google.android.material.button.MaterialButton btnPeUpperMale = view.findViewById(R.id.btn_filter_pe_upper_male);
-        com.google.android.material.button.MaterialButton btnPeUpperFemale = view.findViewById(R.id.btn_filter_pe_upper_female);
-        com.google.android.material.button.MaterialButton btnPeLowerMale = view.findViewById(R.id.btn_filter_pe_lower_male);
-        com.google.android.material.button.MaterialButton btnPeLowerFemale = view.findViewById(R.id.btn_filter_pe_lower_female);
-        com.google.android.material.button.MaterialButton btnSchoolUpperMale = view.findViewById(R.id.btn_filter_school_upper_male);
-        com.google.android.material.button.MaterialButton btnSchoolUpperFemale = view.findViewById(R.id.btn_filter_school_upper_female);
-        com.google.android.material.button.MaterialButton btnSchoolLowerMale = view.findViewById(R.id.btn_filter_school_lower_male);
-        com.google.android.material.button.MaterialButton btnSchoolLowerFemale = view.findViewById(R.id.btn_filter_school_lower_female);
+        com.google.android.material.button.MaterialButton btnApparel = view.findViewById(R.id.btn_filter_apparel);
         com.google.android.material.button.MaterialButton btnAccessories = view.findViewById(R.id.btn_filter_accessories);
+        com.google.android.material.button.MaterialButton btnBags = view.findViewById(R.id.btn_filter_bags);
+        com.google.android.material.button.MaterialButton btnHeadwear = view.findViewById(R.id.btn_filter_headwear);
+        com.google.android.material.button.MaterialButton btnDrinkware = view.findViewById(R.id.btn_filter_drinkware);
+        com.google.android.material.button.MaterialButton btnHomeDecor = view.findViewById(R.id.btn_filter_home_decor);
+        com.google.android.material.button.MaterialButton btnGiftSets = view.findViewById(R.id.btn_filter_gift_sets);
+        com.google.android.material.button.MaterialButton btnCrafts = view.findViewById(R.id.btn_filter_crafts);
         com.google.android.material.button.MaterialButton btnArchived = view.findViewById(R.id.btn_filter_archived);
 
         com.google.android.material.button.MaterialButton[] allButtons = {
-            btnAll, btnPeUpperMale, btnPeUpperFemale, btnPeLowerMale, btnPeLowerFemale,
-            btnSchoolUpperMale, btnSchoolUpperFemale, btnSchoolLowerMale, btnSchoolLowerFemale, btnAccessories, btnArchived
+            btnAll, btnApparel, btnAccessories, btnBags, btnHeadwear,
+            btnDrinkware, btnHomeDecor, btnGiftSets, btnCrafts, btnArchived
         };
 
         String[] categoryNames = {
-            "All", "PE Upper (Male)", "PE Upper (Female)", "PE Lower (Male)", "PE Lower (Female)",
-            "School Uniform Upper (Male)", "School Uniform Upper (Female)", "School Uniform Lower (Male)", "School Uniform Lower (Female)", "Accessories", "Archived"
+            "All", "Apparel", "Accessories", "Bags", "Headwear",
+            "Drinkware", "Home Decor", "Gift Sets & Boxes", "Crafts & Collectibles", "Archived"
         };
 
         for (int i = 0; i < allButtons.length; i++) {
