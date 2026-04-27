@@ -13,6 +13,7 @@ public class Order {
     private long timestamp;
     private String status;
     private List<Map<String, Object>> items;
+    private boolean archived;
 
     public Order() {}
 
@@ -42,4 +43,7 @@ public class Order {
 
     public List<Map<String, Object>> getItems() { return items; }
     public void setItems(List<Map<String, Object>> items) { this.items = items; }
+
+    public boolean isArchived() { return archived; }
+    public void setArchived(boolean archived) { this.archived = archived; }
 }

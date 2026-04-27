@@ -93,14 +93,35 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_update_status"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="44dp"
                 android:backgroundTint="@color/gold_accent"
-                android:text="Take Action"
+                android:text="Update"
                 android:textAllCaps="false"
                 android:textColor="@color/abyss"
+                android:textSize="12sp"
                 android:textStyle="bold"
+                android:paddingHorizontal="4dp"
                 app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_archive_order"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="44dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/midnight"
+                android:text="Archive"
+                android:textAllCaps="false"
+                android:textColor="@color/text_grey"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="4dp"
+                android:visibility="gone"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/white_10"
+                app:strokeWidth="1dp" />
         </LinearLayout>
 
     </LinearLayout>

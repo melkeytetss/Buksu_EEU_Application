@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Super Administrator"
+                        android:text="Admin"
                         android:textColor="@color/gold_accent"
                         android:textSize="12sp"
                         android:textStyle="bold"
@@ -130,10 +130,14 @@
 
             <!-- Products Stat -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_products_stat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/card_surface"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="1dp"
@@ -164,10 +168,14 @@
 
             <!-- Orders Stat -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_orders_stat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/card_surface"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="1dp"
@@ -198,10 +206,14 @@
 
             <!-- Users Stat -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_users_stat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/card_surface"
                 app:cardCornerRadius="12dp"
                 app:strokeWidth="1dp"

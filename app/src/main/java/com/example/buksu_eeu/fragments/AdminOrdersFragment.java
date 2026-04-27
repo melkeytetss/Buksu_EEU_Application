@@ -73,6 +73,7 @@ public class AdminOrdersFragment extends Fragment {
         com.google.android.material.button.MaterialButton btnReady = view.findViewById(R.id.btn_filter_ready);
         com.google.android.material.button.MaterialButton btnCompleted = view.findViewById(R.id.btn_filter_completed);
         com.google.android.material.button.MaterialButton btnCancelled = view.findViewById(R.id.btn_filter_cancelled);
+        com.google.android.material.button.MaterialButton btnArchived = view.findViewById(R.id.btn_filter_archived_orders);
 
         View.OnClickListener filterListener = v -> {
             String newFilter = "All";
@@ -81,6 +82,7 @@ public class AdminOrdersFragment extends Fragment {
             else if (v.getId() == R.id.btn_filter_ready) newFilter = "Ready to pickup";
             else if (v.getId() == R.id.btn_filter_completed) newFilter = "Picked Up";
             else if (v.getId() == R.id.btn_filter_cancelled) newFilter = "Cancelled";
+            else if (v.getId() == R.id.btn_filter_archived_orders) newFilter = "Archived";
 
             if (!currentFilter.equals(newFilter)) {
                 currentFilter = newFilter;
@@ -110,6 +112,9 @@ public class AdminOrdersFragment extends Fragment {
                 btnCancelled.setBackgroundTintList(android.content.res.ColorStateList.valueOf(newFilter.equals("Cancelled") ? activeColor : inactiveColor));
                 btnCancelled.setTextColor(newFilter.equals("Cancelled") ? activeTextColor : inactiveTextColor);
 
+                btnArchived.setBackgroundTintList(android.content.res.ColorStateList.valueOf(newFilter.equals("Archived") ? activeColor : inactiveColor));
+                btnArchived.setTextColor(newFilter.equals("Archived") ? activeTextColor : inactiveTextColor);
+
                 applyFilterAndPagination();
             }
         };
@@ -120,6 +125,7 @@ public class AdminOrdersFragment extends Fragment {
         btnReady.setOnClickListener(filterListener);
         btnCompleted.setOnClickListener(filterListener);
         btnCancelled.setOnClickListener(filterListener);
+        btnArchived.setOnClickListener(filterListener);
     }
 
     private void setupPaginationListeners() {
@@ -167,11 +173,21 @@ public class AdminOrdersFragment extends Fragment {
 
     private void applyFilterAndPagination() {
         filteredOrderList.clear();
-        if (currentFilter.equals("All")) {
-            filteredOrderList.addAll(masterOrderList);
+        if (currentFilter.equals("Archived")) {
+            for (Order order : masterOrderList) {
+                if (order.isArchived()) {
+                    filteredOrderList.add(order);
+                }
+            }
+        } else if (currentFilter.equals("All")) {
+            for (Order order : masterOrderList) {
+                if (!order.isArchived()) {
+                    filteredOrderList.add(order);
+                }
+            }
         } else {
             for (Order order : masterOrderList) {
-                if (currentFilter.equals(order.getStatus())) {
+                if (!order.isArchived() && currentFilter.equals(order.getStatus())) {
                     filteredOrderList.add(order);
                 }
             }

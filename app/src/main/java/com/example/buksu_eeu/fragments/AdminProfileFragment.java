@@ -68,6 +68,27 @@ public class AdminProfileFragment extends Fragment {
         logoutBtn.setOnClickListener(v -> showLogoutDialog());
         editBtn.setOnClickListener(v -> showEditProfileDialog());
         
+        View userCard = view.findViewById(R.id.card_users_stat);
+        if (userCard != null) {
+            userCard.setOnClickListener(v -> showUsersDialog());
+        }
+
+        View productCard = view.findViewById(R.id.card_products_stat);
+        if (productCard != null) {
+            productCard.setOnClickListener(v -> {
+                com.google.android.material.bottomnavigation.BottomNavigationView nav = requireActivity().findViewById(R.id.admin_bottom_nav);
+                if (nav != null) nav.setSelectedItemId(R.id.admin_nav_products);
+            });
+        }
+
+        View orderCard = view.findViewById(R.id.card_orders_stat);
+        if (orderCard != null) {
+            orderCard.setOnClickListener(v -> {
+                com.google.android.material.bottomnavigation.BottomNavigationView nav = requireActivity().findViewById(R.id.admin_bottom_nav);
+                if (nav != null) nav.setSelectedItemId(R.id.admin_nav_orders);
+            });
+        }
+        
         loadAdminData();
         loadQuickStats(view);
     }
@@ -169,6 +190,41 @@ public class AdminProfileFragment extends Fragment {
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
+    }
+
+    private void showUsersDialog() {
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_user_list, null);
+        androidx.recyclerview.widget.RecyclerView recyclerView = dialogView.findViewById(R.id.recycler_users_list);
+        View btnClose = dialogView.findViewById(R.id.btn_close_users);
+
+        java.util.List<com.example.buksu_eeu.UserModel> userList = new java.util.ArrayList<>();
+        com.example.buksu_eeu.UserAdapter adapter = new com.example.buksu_eeu.UserAdapter(requireContext(), userList);
+
+        recyclerView.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext(), android.R.style.Theme_Material_Light_NoActionBar_Fullscreen)
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(R.color.abyss);
+        }
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        db.collection("users").whereEqualTo("role", "student").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (com.google.firebase.firestore.DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
+                com.example.buksu_eeu.UserModel user = doc.toObject(com.example.buksu_eeu.UserModel.class);
+                if (user != null) {
+                    user.setUid(doc.getId());
+                    userList.add(user);
+                }
+            }
+            adapter.notifyDataSetChanged();
+        });
+
+        dialog.show();
     }
     
     @Override

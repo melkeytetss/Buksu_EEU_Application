@@ -50,6 +50,25 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
 
         holder.updateStatusBtn.setOnClickListener(v -> showStatusDialog(order));
         
+        // Archive button - show only for Picked Up, Cancelled orders
+        String status = order.getStatus();
+        boolean canArchive = "Picked Up".equals(status) || "Cancelled".equals(status);
+        
+        if (canArchive) {
+            holder.archiveBtn.setVisibility(View.VISIBLE);
+            holder.updateStatusBtn.setVisibility(View.GONE);
+            if (order.isArchived()) {
+                holder.archiveBtn.setText("Unarchive");
+                holder.archiveBtn.setOnClickListener(v -> archiveOrder(order, false));
+            } else {
+                holder.archiveBtn.setText("Archive");
+                holder.archiveBtn.setOnClickListener(v -> archiveOrder(order, true));
+            }
+        } else {
+            holder.archiveBtn.setVisibility(View.GONE);
+            holder.updateStatusBtn.setVisibility(View.VISIBLE);
+        }
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, AdminOrderDetailActivity.class);
             intent.putExtra("orderId", order.getOrderId());
@@ -150,6 +169,25 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
         db.collection("notifications").add(notification);
     }
 
+    private void archiveOrder(Order order, boolean archive) {
+        String action = archive ? "Archive" : "Unarchive";
+        new MaterialAlertDialogBuilder(context, R.style.DarkAlertDialog)
+                .setTitle(action + " Order")
+                .setMessage(action + " this order?")
+                .setPositiveButton(action, (dialog, which) -> {
+                    db.collection("orders").document(order.getOrderId())
+                            .update("archived", archive)
+                            .addOnSuccessListener(aVoid -> 
+                                Toast.makeText(context, "Order " + action.toLowerCase() + "d", Toast.LENGTH_SHORT).show()
+                            )
+                            .addOnFailureListener(e -> 
+                                Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                            );
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
     @Override
     public int getItemCount() {
         return orderList.size();
@@ -157,7 +195,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView customerName, status, itemsSummary, totalPrice;
-        MaterialButton updateStatusBtn;
+        MaterialButton updateStatusBtn, archiveBtn;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -166,6 +204,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
             itemsSummary = itemView.findViewById(R.id.order_items_summary);
             totalPrice = itemView.findViewById(R.id.order_total_price);
             updateStatusBtn = itemView.findViewById(R.id.btn_update_status);
+            archiveBtn = itemView.findViewById(R.id.btn_archive_order);
         }
     }
 }
