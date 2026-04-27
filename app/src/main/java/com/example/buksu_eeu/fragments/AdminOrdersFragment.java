@@ -72,6 +72,7 @@ public class AdminOrdersFragment extends Fragment {
         com.google.android.material.button.MaterialButton btnConfirmed = view.findViewById(R.id.btn_filter_confirmed);
         com.google.android.material.button.MaterialButton btnReady = view.findViewById(R.id.btn_filter_ready);
         com.google.android.material.button.MaterialButton btnCompleted = view.findViewById(R.id.btn_filter_completed);
+        com.google.android.material.button.MaterialButton btnCancelled = view.findViewById(R.id.btn_filter_cancelled);
 
         View.OnClickListener filterListener = v -> {
             String newFilter = "All";
@@ -79,6 +80,7 @@ public class AdminOrdersFragment extends Fragment {
             else if (v.getId() == R.id.btn_filter_confirmed) newFilter = "Confirmed the order";
             else if (v.getId() == R.id.btn_filter_ready) newFilter = "Ready to pickup";
             else if (v.getId() == R.id.btn_filter_completed) newFilter = "Picked Up";
+            else if (v.getId() == R.id.btn_filter_cancelled) newFilter = "Cancelled";
 
             if (!currentFilter.equals(newFilter)) {
                 currentFilter = newFilter;
@@ -105,6 +107,9 @@ public class AdminOrdersFragment extends Fragment {
                 btnCompleted.setBackgroundTintList(android.content.res.ColorStateList.valueOf(newFilter.equals("Picked Up") ? activeColor : inactiveColor));
                 btnCompleted.setTextColor(newFilter.equals("Picked Up") ? activeTextColor : inactiveTextColor);
 
+                btnCancelled.setBackgroundTintList(android.content.res.ColorStateList.valueOf(newFilter.equals("Cancelled") ? activeColor : inactiveColor));
+                btnCancelled.setTextColor(newFilter.equals("Cancelled") ? activeTextColor : inactiveTextColor);
+
                 applyFilterAndPagination();
             }
         };
@@ -114,6 +119,7 @@ public class AdminOrdersFragment extends Fragment {
         btnConfirmed.setOnClickListener(filterListener);
         btnReady.setOnClickListener(filterListener);
         btnCompleted.setOnClickListener(filterListener);
+        btnCancelled.setOnClickListener(filterListener);
     }
 
     private void setupPaginationListeners() {

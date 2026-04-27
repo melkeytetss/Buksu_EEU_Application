@@ -23,6 +23,9 @@ public class OrdersFragment extends Fragment {
     private TextView noOrdersText;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private com.google.firebase.firestore.ListenerRegistration orderListener;
+    private String currentStatusFilter = "All";
+    private List<com.google.android.material.button.MaterialButton> filterButtons;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +42,53 @@ public class OrdersFragment extends Fragment {
         noOrdersText = view.findViewById(R.id.no_orders_text);
         recyclerView = view.findViewById(R.id.recycler_user_orders);
 
+        setupFilters(view);
         setupRecyclerView();
         loadUserOrders();
+    }
+
+    private void setupFilters(View view) {
+        filterButtons = new ArrayList<>();
+        filterButtons.add(view.findViewById(R.id.btn_filter_all));
+        filterButtons.add(view.findViewById(R.id.btn_filter_pending));
+        filterButtons.add(view.findViewById(R.id.btn_filter_confirmed));
+        filterButtons.add(view.findViewById(R.id.btn_filter_ready));
+        filterButtons.add(view.findViewById(R.id.btn_filter_completed));
+        filterButtons.add(view.findViewById(R.id.btn_filter_cancelled));
+
+        for (com.google.android.material.button.MaterialButton btn : filterButtons) {
+            btn.setOnClickListener(v -> {
+                String filter = "All";
+                if (v.getId() == R.id.btn_filter_pending) filter = "Pending";
+                else if (v.getId() == R.id.btn_filter_confirmed) filter = "Confirmed the order";
+                else if (v.getId() == R.id.btn_filter_ready) filter = "Ready to pickup";
+                else if (v.getId() == R.id.btn_filter_completed) filter = "Picked Up";
+                else if (v.getId() == R.id.btn_filter_cancelled) filter = "Cancelled";
+                
+                if (!currentStatusFilter.equals(filter)) {
+                    currentStatusFilter = filter;
+                    updateFilterButtonsUI(btn);
+                    loadUserOrders();
+                }
+            });
+        }
+    }
+
+    private void updateFilterButtonsUI(com.google.android.material.button.MaterialButton selectedBtn) {
+        int activeColor = getResources().getColor(R.color.btn_blue);
+        int activeTextColor = getResources().getColor(R.color.white);
+        int inactiveColor = getResources().getColor(R.color.soft_white);
+        int inactiveTextColor = getResources().getColor(R.color.black);
+
+        for (com.google.android.material.button.MaterialButton btn : filterButtons) {
+            if (btn == selectedBtn) {
+                btn.setBackgroundTintList(android.content.res.ColorStateList.valueOf(activeColor));
+                btn.setTextColor(activeTextColor);
+            } else {
+                btn.setBackgroundTintList(android.content.res.ColorStateList.valueOf(inactiveColor));
+                btn.setTextColor(inactiveTextColor);
+            }
+        }
     }
 
     private void setupRecyclerView() {
@@ -56,10 +104,20 @@ public class OrdersFragment extends Fragment {
             android.util.Log.e("OrdersFragment", "No user logged in!");
             return;
         }
-        android.util.Log.d("OrdersFragment", "Loading orders for userId: " + userId);
-        db.collection("orders")
-                .whereEqualTo("userId", userId)
-                .addSnapshotListener((value, error) -> {
+        android.util.Log.d("OrdersFragment", "Loading orders for userId: " + userId + " with filter: " + currentStatusFilter);
+        
+        // Remove previous listener if exists
+        if (orderListener != null) {
+            orderListener.remove();
+        }
+
+        Query query = db.collection("orders").whereEqualTo("userId", userId);
+        
+        if (!currentStatusFilter.equals("All")) {
+            query = query.whereEqualTo("status", currentStatusFilter);
+        }
+
+        orderListener = query.addSnapshotListener((value, error) -> {
                     if (error != null) {
                         android.util.Log.e("OrdersFragment", "Firestore Error: " + error.getMessage());
                         if (getContext() != null) {
@@ -99,5 +157,13 @@ public class OrdersFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                 });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (orderListener != null) {
+            orderListener.remove();
+        }
     }
 }

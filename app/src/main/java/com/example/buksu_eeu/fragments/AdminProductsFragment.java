@@ -124,15 +124,16 @@ public class AdminProductsFragment extends Fragment {
         com.google.android.material.button.MaterialButton btnSchoolLowerMale = view.findViewById(R.id.btn_filter_school_lower_male);
         com.google.android.material.button.MaterialButton btnSchoolLowerFemale = view.findViewById(R.id.btn_filter_school_lower_female);
         com.google.android.material.button.MaterialButton btnAccessories = view.findViewById(R.id.btn_filter_accessories);
+        com.google.android.material.button.MaterialButton btnArchived = view.findViewById(R.id.btn_filter_archived);
 
         com.google.android.material.button.MaterialButton[] allButtons = {
             btnAll, btnPeUpperMale, btnPeUpperFemale, btnPeLowerMale, btnPeLowerFemale,
-            btnSchoolUpperMale, btnSchoolUpperFemale, btnSchoolLowerMale, btnSchoolLowerFemale, btnAccessories
+            btnSchoolUpperMale, btnSchoolUpperFemale, btnSchoolLowerMale, btnSchoolLowerFemale, btnAccessories, btnArchived
         };
 
         String[] categoryNames = {
             "All", "PE Upper (Male)", "PE Upper (Female)", "PE Lower (Male)", "PE Lower (Female)",
-            "School Uniform Upper (Male)", "School Uniform Upper (Female)", "School Uniform Lower (Male)", "School Uniform Lower (Female)", "Accessories"
+            "School Uniform Upper (Male)", "School Uniform Upper (Female)", "School Uniform Lower (Male)", "School Uniform Lower (Female)", "Accessories", "Archived"
         };
 
         for (int i = 0; i < allButtons.length; i++) {
@@ -191,10 +192,25 @@ public class AdminProductsFragment extends Fragment {
                 }
             }
 
-            if (!currentCategoryFilter.equals("All")) {
-                String productCategory = product.getCategory() != null ? product.getCategory() : "";
-                if (!productCategory.equalsIgnoreCase(currentCategoryFilter)) {
+            if (currentCategoryFilter.equals("Archived")) {
+                // Show ONLY archived products
+                if (!product.isArchived()) {
                     matchesCategory = false;
+                }
+            } else if (currentCategoryFilter.equals("All")) {
+                // Show ONLY active products
+                if (product.isArchived()) {
+                    matchesCategory = false;
+                }
+            } else {
+                // Category filter: Show ONLY active products matching category
+                if (product.isArchived()) {
+                    matchesCategory = false;
+                } else {
+                    String productCategory = product.getCategory() != null ? product.getCategory() : "";
+                    if (!productCategory.equalsIgnoreCase(currentCategoryFilter)) {
+                        matchesCategory = false;
+                    }
                 }
             }
 
