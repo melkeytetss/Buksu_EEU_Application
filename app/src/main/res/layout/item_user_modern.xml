@@ -24,15 +24,26 @@
             app:cardCornerRadius="25dp"
             app:cardBackgroundColor="@color/midnight"
             app:cardElevation="0dp">
-            <TextView
-                android:id="@+id/user_initials"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="U"
-                android:textColor="@color/gold_accent"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/user_initials"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="U"
+                    android:textColor="@color/gold_accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                
+                <ImageView
+                    android:id="@+id/user_profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout

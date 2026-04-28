@@ -133,6 +133,9 @@ public class RegisterActivity extends AppCompatActivity {
                             userData.put("username", user.getDisplayName());
                             userData.put("email", user.getEmail());
                             userData.put("role", "student"); // Default role
+                            if (user.getPhotoUrl() != null) {
+                                userData.put("profilePhoto", user.getPhotoUrl().toString());
+                            }
 
                             db.collection("users").document(user.getUid()).set(userData)
                                     .addOnSuccessListener(aVoid -> navigateToHome());

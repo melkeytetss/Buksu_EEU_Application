@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
@@ -38,6 +40,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             initials = user.getUsername().substring(0, 1).toUpperCase();
         }
         holder.initials.setText(initials);
+
+        if (user.getProfilePhoto() != null && !user.getProfilePhoto().isEmpty()) {
+            holder.profileImage.setVisibility(View.VISIBLE);
+            holder.initials.setVisibility(View.GONE);
+            Glide.with(context)
+                    .load(user.getProfilePhoto())
+                    .centerCrop()
+                    .into(holder.profileImage);
+        } else {
+            holder.profileImage.setVisibility(View.GONE);
+            holder.initials.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -47,6 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView fullName, email, phone, initials;
+        ImageView profileImage;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +69,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             email = itemView.findViewById(R.id.user_email);
             phone = itemView.findViewById(R.id.user_phone);
             initials = itemView.findViewById(R.id.user_initials);
+            profileImage = itemView.findViewById(R.id.user_profile_image);
         }
     }
 }
