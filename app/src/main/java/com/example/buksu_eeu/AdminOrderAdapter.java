@@ -133,7 +133,23 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Or
                     // Create Notification for User
                     String userId = order.getUserId();
                     if (userId != null) {
-                        sendNotification(userId, "Order Status Updated", "Your order is now: " + newStatus);
+                        String notificationMessage;
+                        switch (newStatus) {
+                            case "Confirmed the order":
+                                notificationMessage = "Your order is now confirmed by the Admin";
+                                break;
+                            case "Ready to pickup":
+                                notificationMessage = "Your order is now ready to pickup";
+                                break;
+                            case "Picked Up":
+                                notificationMessage = "Your order is now Picked up";
+                                break;
+                            default:
+                                notificationMessage = "Your order status is now " + newStatus;
+                                break;
+                        }
+                        
+                        sendNotification(userId, "Order Status Updated", notificationMessage);
                         
                         // Send Email if ready for pickup
                         if (newStatus.equals("Ready to pickup") && order.getCustomerEmail() != null) {
