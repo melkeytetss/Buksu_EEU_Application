@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         finish();
                     } else {
-                        Toast.makeText(this, "Error checking role: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        showCustomToast("Error checking role: " + task.getException().getMessage(), true);
                     }
                 });
     }
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             checkAndCreateUserRecord(user);
                         }
                     } else {
-                        Toast.makeText(MainActivity.this, "Google Auth failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        showCustomToast("Google Auth failed: " + task.getException().getMessage(), true);
                     }
                 });
     }
@@ -237,10 +237,7 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View layout;
         if (isError) {
-            layout = inflater.inflate(R.layout.custom_toast_add_to_cart, null);
-            com.google.android.material.card.MaterialCardView card = (com.google.android.material.card.MaterialCardView) layout;
-            card.setCardBackgroundColor(getResources().getColor(R.color.tag_red));
-            // For error, we might want to change the icon too, but let's stick to the color for now
+            layout = inflater.inflate(R.layout.custom_toast_error, null);
         } else {
             layout = inflater.inflate(R.layout.custom_toast_success, null);
         }
@@ -259,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please fill all fields", true);
             return;
         }
         mAuth.signInWithEmailAndPassword(email, password)
@@ -268,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                         checkUserRoleAndNavigate(mAuth.getCurrentUser());
                     } else {
                         String errorMsg = task.getException() != null ? task.getException().getMessage() : "Authentication failed";
-                        Toast.makeText(MainActivity.this, "Login Failed: " + errorMsg, Toast.LENGTH_LONG).show();
+                        showCustomToast("Login Failed: " + errorMsg, true);
                     }
                 });
     }

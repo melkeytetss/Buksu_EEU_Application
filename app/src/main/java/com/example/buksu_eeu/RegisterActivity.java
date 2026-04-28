@@ -83,12 +83,12 @@ public class RegisterActivity extends AppCompatActivity {
         String phone = phoneInput.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(username) || TextUtils.isEmpty(phone)) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please fill all fields", true);
             return;
         }
 
         if (password.length() < 8) {
-            Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show();
+            showCustomToast("Password must be at least 8 characters", true);
             return;
         }
 
@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                         saveUserToFirestore(userId, username, email, phone);
                     } else {
                         String errorMsg = task.getException() != null ? task.getException().getMessage() : "Unknown error";
-                        Toast.makeText(RegisterActivity.this, "Registration failed: " + errorMsg, Toast.LENGTH_LONG).show();
+                        showCustomToast("Registration failed: " + errorMsg, true);
                     }
                 });
     }
@@ -124,9 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View layout;
         if (isError) {
-            layout = inflater.inflate(R.layout.custom_toast_add_to_cart, null);
-            com.google.android.material.card.MaterialCardView card = (com.google.android.material.card.MaterialCardView) layout;
-            card.setCardBackgroundColor(getResources().getColor(R.color.tag_red));
+            layout = inflater.inflate(R.layout.custom_toast_error, null);
         } else {
             layout = inflater.inflate(R.layout.custom_toast_success, null);
         }
