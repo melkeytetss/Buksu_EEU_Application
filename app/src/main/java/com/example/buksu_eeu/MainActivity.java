@@ -235,13 +235,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void showCustomToast(String message, boolean isError) {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast_add_to_cart, null);
-        
-        com.google.android.material.card.MaterialCardView card = (com.google.android.material.card.MaterialCardView) layout;
+        View layout;
         if (isError) {
+            layout = inflater.inflate(R.layout.custom_toast_add_to_cart, null);
+            com.google.android.material.card.MaterialCardView card = (com.google.android.material.card.MaterialCardView) layout;
             card.setCardBackgroundColor(getResources().getColor(R.color.tag_red));
+            // For error, we might want to change the icon too, but let's stick to the color for now
         } else {
-            card.setCardBackgroundColor(getResources().getColor(R.color.card_navy));
+            layout = inflater.inflate(R.layout.custom_toast_success, null);
         }
 
         TextView text = layout.findViewById(R.id.toast_message);

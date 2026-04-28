@@ -97,69 +97,18 @@
             android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@id/welcome_subtitle">
 
-            <!-- Google Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/google_btn"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:backgroundTint="@color/card_surface"
-                android:text="Continue with Google"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:cornerRadius="14dp"
-                app:elevation="0dp"
-                app:icon="@drawable/ic_google"
-                app:iconGravity="textStart"
-                app:iconPadding="12dp"
-                app:iconTint="@null"
-                app:strokeColor="@color/white_20"
-                app:strokeWidth="1dp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- Divider -->
-            <LinearLayout
-                android:id="@+id/divider_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/google_btn">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/white_20" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:text="or sign up with email"
-                    android:textColor="@color/text_grey"
-                    android:textSize="12sp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/white_20" />
-            </LinearLayout>
-
             <!-- Username Label -->
             <TextView
                 android:id="@+id/username_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="0dp"
                 android:text="Full Name"
                 android:textColor="@color/soft_white"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_layout" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Username Input -->
             <com.google.android.material.card.MaterialCardView
@@ -201,6 +150,59 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Phone Label -->
+            <TextView
+                android:id="@+id/phone_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Phone Number"
+                android:textColor="@color/soft_white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/username_input_card" />
+
+            <!-- Phone Input -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/phone_input_card"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/card_surface"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/white_20"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/phone_label">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@android:drawable/ic_menu_call"
+                        app:tint="@color/text_grey" />
+
+                    <EditText
+                        android:id="@+id/phone_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="12dp"
+                        android:background="@android:color/transparent"
+                        android:hint="Enter your phone number"
+                        android:inputType="phone"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/text_grey"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- Email Label -->
             <TextView
                 android:id="@+id/email_label"
@@ -212,7 +214,7 @@
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/username_input_card" />
+                app:layout_constraintTop_toBottomOf="@id/phone_input_card" />
 
             <!-- Email Input -->
             <com.google.android.material.card.MaterialCardView
