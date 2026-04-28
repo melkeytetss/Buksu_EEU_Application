@@ -24,6 +24,7 @@ public class OrdersFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private com.google.firebase.firestore.ListenerRegistration orderListener;
+    public static String initialFilter = "All";
     private String currentStatusFilter = "All";
     private List<com.google.android.material.button.MaterialButton> filterButtons;
 
@@ -41,6 +42,10 @@ public class OrdersFragment extends Fragment {
 
         noOrdersText = view.findViewById(R.id.no_orders_text);
         recyclerView = view.findViewById(R.id.recycler_user_orders);
+
+        currentStatusFilter = initialFilter;
+        // Reset for next time fragment is loaded normally from nav bar
+        initialFilter = "All";
 
         setupFilters(view);
         setupRecyclerView();
@@ -71,6 +76,18 @@ public class OrdersFragment extends Fragment {
                     loadUserOrders();
                 }
             });
+
+            // Set initial button state based on initialFilter
+            String btnFilter = "All";
+            if (btn.getId() == R.id.btn_filter_pending) btnFilter = "Pending";
+            else if (btn.getId() == R.id.btn_filter_confirmed) btnFilter = "Confirmed the order";
+            else if (btn.getId() == R.id.btn_filter_ready) btnFilter = "Ready to pickup";
+            else if (btn.getId() == R.id.btn_filter_completed) btnFilter = "Picked Up";
+            else if (btn.getId() == R.id.btn_filter_cancelled) btnFilter = "Cancelled";
+
+            if (btnFilter.equals(currentStatusFilter)) {
+                updateFilterButtonsUI(btn);
+            }
         }
     }
 

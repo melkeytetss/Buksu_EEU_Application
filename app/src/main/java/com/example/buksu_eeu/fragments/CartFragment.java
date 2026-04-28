@@ -63,6 +63,16 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartChangedL
             });
         }
 
+        MaterialButton startShoppingBtn = view.findViewById(R.id.btn_start_shopping);
+        if (startShoppingBtn != null) {
+            startShoppingBtn.setOnClickListener(v -> {
+                com.google.android.material.bottomnavigation.BottomNavigationView nav = requireActivity().findViewById(R.id.bottom_nav_view);
+                if (nav != null) {
+                    nav.setSelectedItemId(R.id.nav_home);
+                }
+            });
+        }
+
         
         CartManager.getInstance().loadCartFromFirestore(() -> {
             if (getView() != null) {

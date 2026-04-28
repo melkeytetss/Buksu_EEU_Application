@@ -26,6 +26,7 @@ import com.cloudinary.android.callback.UploadCallback;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Map;
 
 public class ProfileFragment extends Fragment {
@@ -40,6 +41,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseFirestore db;
     private String currentUid;
     private String currentUserPhone = "";
+    private TextView statPending, statPickup, statCompleted;
+    private View cardPending, cardPickup, cardCompleted;
 
     private final ActivityResultLauncher<Intent> pickImageLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -68,15 +71,19 @@ public class ProfileFragment extends Fragment {
 
         if (currentUid != null) {
             fetchUserInfo();
+            fetchOrderStats();
         }
 
         btnChangePhoto.setOnClickListener(v -> openGallery());
+        
+        // Setup Stat Card Listeners
+        if (cardPending != null) cardPending.setOnClickListener(v -> navigateToOrders("Pending"));
+        if (cardPickup != null) cardPickup.setOnClickListener(v -> navigateToOrders("Ready to pickup"));
+        if (cardCompleted != null) cardCompleted.setOnClickListener(v -> navigateToOrders("Picked Up"));
+
         // Menu items functionality
         View btnEditProfile = view.findViewById(R.id.btn_edit_profile_user);
         if (btnEditProfile != null) btnEditProfile.setOnClickListener(v -> showEditProfileDialog());
-
-        View btnSettings = view.findViewById(R.id.btn_app_settings);
-        if (btnSettings != null) btnSettings.setOnClickListener(v -> Toast.makeText(requireContext(), "Settings coming soon", Toast.LENGTH_SHORT).show());
 
         view.findViewById(R.id.btn_logout_user).setOnClickListener(v -> showLogoutConfirmationDialog());
     }
@@ -87,6 +94,54 @@ public class ProfileFragment extends Fragment {
         profileImage = view.findViewById(R.id.profile_image_user);
         btnChangePhoto = view.findViewById(R.id.btn_edit_image);
         logoutBtn = view.findViewById(R.id.btn_logout_user);
+
+        // Stats
+        statPending = view.findViewById(R.id.stat_pending_user);
+        statPickup = view.findViewById(R.id.stat_pickup_user);
+        statCompleted = view.findViewById(R.id.stat_completed_user);
+        cardPending = view.findViewById(R.id.card_pending_user);
+        cardPickup = view.findViewById(R.id.card_pickup_user);
+        cardCompleted = view.findViewById(R.id.card_completed_user);
+    }
+
+    private void fetchOrderStats() {
+        if (currentUid == null) return;
+
+        db.collection("orders")
+                .whereEqualTo("userId", currentUid)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    int pending = 0;
+                    int pickup = 0;
+                    int completed = 0;
+
+                    for (com.google.firebase.firestore.DocumentSnapshot doc : queryDocumentSnapshots) {
+                        String status = doc.getString("status");
+                        if (status == null) continue;
+
+                        if (status.equalsIgnoreCase("Pending")) {
+                            pending++;
+                        } else if (status.equalsIgnoreCase("Ready to pickup")) {
+                            pickup++;
+                        } else if (status.equalsIgnoreCase("Picked Up")) {
+                            completed++;
+                        }
+                    }
+
+                    if (isAdded()) {
+                        if (statPending != null) statPending.setText(String.valueOf(pending));
+                        if (statPickup != null) statPickup.setText(String.valueOf(pickup));
+                        if (statCompleted != null) statCompleted.setText(String.valueOf(completed));
+                    }
+                });
+    }
+
+    private void navigateToOrders(String filter) {
+        com.example.buksu_eeu.OrdersFragment.initialFilter = filter;
+        BottomNavigationView nav = requireActivity().findViewById(R.id.bottom_nav_view);
+        if (nav != null) {
+            nav.setSelectedItemId(R.id.nav_orders);
+        }
     }
 
     private void fetchUserInfo() {
